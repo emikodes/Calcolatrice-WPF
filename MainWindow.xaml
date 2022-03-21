@@ -1,0 +1,93 @@
+﻿<Window x:Name="Form1" x:Class="Calcolatrice.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Calcolatrice"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="597" Width="405" ResizeMode="NoResize" WindowStyle="None">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style TargetType="{x:Type Button}" x:Key="AButtonStyle">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius ="40" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#FF232323" Height="598" VerticalAlignment="Top" HorizontalAlignment="Left" Width="405" MouseDown="Grid_MouseDown" Margin="0,0,0,-1">
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="125,70,-125,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="0"/>
+        <TextBlock x:Name="Risultato" HorizontalAlignment="Left" Height="108" Margin="16,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="368" Background="#FFDDDDDD"/>
+        <Button  Style="{StaticResource AButtonStyle}" x:Name="zero" Content="0" HorizontalAlignment="Left" Margin="16,516,0,0" VerticalAlignment="Top" Width="69" Height="69" Click="generic_Click" Background="#FF60666B" FontSize="24"/>
+        <Button  Style="{StaticResource AButtonStyle}" x:Name="uno" Content="1" HorizontalAlignment="Left" Margin="16,430,-58,0" VerticalAlignment="Top" Width="69" Height="69" Click="generic_Click" Background="#FF60666B" FontSize="24"/>
+        <Button  Style="{StaticResource AButtonStyle}" x:Name="sette" Content="7" HorizontalAlignment="Left" Margin="16,258,0,0" VerticalAlignment="Top" Width="69" Height="69"  Click="generic_Click" Background="#FF60666B" FontSize="24"/>
+        <Button  Style="{StaticResource AButtonStyle}" x:Name="due" Content="2" HorizontalAlignment="Left" Margin="125,430,-167,0" VerticalAlignment="Top" Width="69" Height="69"  Click="generic_Click" Background="#FF60666B" FontSize="24"/>
+        <Button  Style="{StaticResource AButtonStyle}" x:Name="tre" Content="3" HorizontalAlignment="Left" Margin="231,430,0,0" VerticalAlignment="Top" Width="69" Height="69" RenderTransformOrigin="0.302,-0.054"  Click="generic_Click" Background="#FF60666B" FontSize="24"/>
+        <Button  Style="{StaticResource AButtonStyle}" x:Name="quattro" Content="4" HorizontalAlignment="Left" Margin="16,345,0,0" VerticalAlignment="Top" Width="69" Height="69"  Click="generic_Click" Background="#FF60666B" FontSize="24"/>
+        <Button  Style="{StaticResource AButtonStyle}" x:Name="cinque" Content="5" HorizontalAlignment="Left" Margin="125,345,-167,0" VerticalAlignment="Top" Width="69" Height="69"  Click="generic_Click" Background="#FF60666B" FontSize="24"/>
+        <Button  Style="{StaticResource AButtonStyle}" x:Name="sei" Content="6" HorizontalAlignment="Left" Margin="231,345,0,0" VerticalAlignment="Top" Width="69" Height="69" RenderTransformOrigin="-0.288,0.121" Click="generic_Click" Background="#FF60666B" FontSize="24"/>
+        <Button  Style="{StaticResource AButtonStyle}" x:Name="otto" Content="8" HorizontalAlignment="Left" Margin="125,258,0,0" VerticalAlignment="Top" Width="69" Height="69" Click="generic_Click" Background="#FF60666B" FontSize="24"/>
+        <Button  Style="{StaticResource AButtonStyle}" x:Name="nove" Content="9" HorizontalAlignment="Left" Margin="231,258,0,0" VerticalAlignment="Top" Width="69" Height="69" Click="generic_Click" Background="#FF60666B" FontSize="24"/>
+        <Button  Style="{StaticResource AButtonStyle}" x:Name="punto" Content="." HorizontalAlignment="Left" Margin="138,532,0,0" VerticalAlignment="Top" Width="42" Height="39" Click="generic_Click" FontFamily="Arial Black" FontSize="24"/>
+        <Button  Style="{StaticResource AButtonStyle}" x:Name="risultato_button" Content="=" HorizontalAlignment="Left" Margin="318,519,0,0" VerticalAlignment="Top" Width="66" Height="66" RenderTransformOrigin="0.302,-0.054" Click="risultato_button_Click" Background="#FFFFB30D" FontFamily="Arial Black" FontSize="24"/>
+        <Button  Style="{StaticResource AButtonStyle}" x:Name="piu" Content="+" HorizontalAlignment="Left" Margin="342,446,0,0" VerticalAlignment="Top" Width="42" Height="39" RenderTransformOrigin="0.302,-0.054" Click="operator_Click" Background="#FFFFB30D" FontFamily="Arial Black" FontSize="24"/>
+        <Button  Style="{StaticResource AButtonStyle}" x:Name="meno" Content="-" HorizontalAlignment="Left" Margin="342,387,0,0" VerticalAlignment="Top" Width="42" Height="38" RenderTransformOrigin="0.302,-0.054" Click="operator_Click" Background="#FFFFB30D" FontFamily="Arial Black" FontSize="24"/>
+        <Button  Style="{StaticResource AButtonStyle}" x:Name="per" Content="*" HorizontalAlignment="Left" Margin="342,322,0,0" VerticalAlignment="Top" Width="42" Height="39" RenderTransformOrigin="0.302,-0.054" Click="operator_Click" Background="#FFFFB30D" FontFamily="Arial Black" FontSize="24"/>
+        <Button  Style="{StaticResource AButtonStyle}" x:Name="diviso" Content="/" HorizontalAlignment="Left" Margin="342,258,0,0" VerticalAlignment="Top" Width="42" Height="39" RenderTransformOrigin="0.302,-0.054" Click="operator_Click" Background="#FFFFB30D" FontFamily="Arial Black" FontSize="24"/>
+        <Button  Name="cancel" Content="AC" HorizontalAlignment="Left" Margin="16,181,0,0" VerticalAlignment="Top" Width="125" RenderTransformOrigin="-0.401,-0.703" Click="cancel_Click" Background="Red" Height="31" FontFamily="Arial Black"/>
+        <Button Name="undo" Content="Undo" HorizontalAlignment="Left" Margin="259,181,0,0" VerticalAlignment="Top" Width="125" RenderTransformOrigin="-0.401,-0.703" Click="undo_click" Background="#FF0084FF" Height="31" FontFamily="Arial Black"/>
+
+        <Button Style="{StaticResource AButtonStyle}" x:Name="close" Content="X" HorizontalAlignment="Left" Margin="365,2,0,0" VerticalAlignment="Top" Width="32" Height="32" RenderTransformOrigin="0.531,0.208" Background="Red" FontSize="18" FontFamily="Verdana" Foreground="#FF383838" Click="close_Click"/>
+        <Button Style="{StaticResource AButtonStyle}" Name="History_button" Content="History" HorizontalAlignment="Left" Margin="176,172,0,0" VerticalAlignment="Top" Width="49" Height="49" Click="History_button_Click"/>
+        <ListBox x:Name="ListBox_cronologia" HorizontalAlignment="Left" Height="327" Margin="16,258,0,0" VerticalAlignment="Top" Width="368" Visibility="Hidden"/>
+        <Label x:Name="label_Cronologia" Content="Cronologia operazioni effettuate:" HorizontalAlignment="Left" Margin="31,215,0,0" VerticalAlignment="Top" Foreground="#FFDEDEDE" FontFamily="Segoe UI Black" FontSize="20" Visibility="Hidden"/>
+    </Grid>
+</Window>
