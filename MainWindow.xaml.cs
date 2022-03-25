@@ -61,30 +61,32 @@ namespace Calcolatrice
                 }
             }
         }
-
         private void risultato_button_Click(object sender, RoutedEventArgs e)
         {
-            if (Risultato.Text != "") //if it is not empty (if i have something to operate on)
+            if (Risultato.Text != "")
             {
                 try
                 {
-                    result = Convert.ToDouble(Risultato.Text);
-                    string content;
+                    operazioni.Enqueue(Convert.ToDouble(Risultato.Text));
 
-                    for (int i = 0; i < operazioni.Count - 1; i++)
+                    result = Convert.ToDouble(operazioni.Dequeue());
+                    char content;
+                    int n = operazioni.Count;
+
+                    for (int i = 0; i < n/2; i++)
                     {
-                        switch (content = (Convert.ToString(operazioni.Dequeue())))
+                        switch (content = (Convert.ToChar(operazioni.Dequeue())))
                         {
-                            case "*":
+                            case '*':
                                 result *= Convert.ToDouble(operazioni.Dequeue());
                                 break;
-                            case "+":
+                            case '+':
                                 result += Convert.ToDouble(operazioni.Dequeue());
                                 break;
-                            case "-":
+                            case '-':
                                 result -= Convert.ToDouble(operazioni.Dequeue());
                                 break;
-                            case "/":
+                            case '/':
                                 result /= Convert.ToDouble(operazioni.Dequeue());
                                 break;
                         }
@@ -93,11 +95,10 @@ namespace Calcolatrice
                 }
                 catch (Exception ex)
                 {
-                    Risultato.Text = ""; //whatever unexpected happens, set the textBox's text to empty.
+                    Risultato.Text = "";
                 }
             }
         }
-
         private void undo_click(object sender, RoutedEventArgs e)
         {
             if (cronologia.Count > 0)
