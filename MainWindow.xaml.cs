@@ -104,6 +104,8 @@ namespace Calcolatrice
             if (cronologia.Count > 0)
             {
                 Risultato.Text = Convert.ToString(cronologia.Pop()); //remove last element inserted in the results stack
+
+                update_history_listBox();
             }
         }
 
@@ -120,7 +122,7 @@ namespace Calcolatrice
             }
         }
 
-        private void History_button_Click(object sender, RoutedEventArgs e)
+        private void update_history_listBox()
         {
             ListBox_cronologia.Items.Clear(); //remove all the elements contained before
             foreach (object obj in cronologia) //add items to listbox before showing it
@@ -128,6 +130,12 @@ namespace Calcolatrice
                 ListBox_cronologia.Items.Add(Convert.ToString(obj));
             }
 
+        }
+
+        private void History_button_Click(object sender, RoutedEventArgs e)
+        {
+            update_history_listBox();
+            
             //change component's visibility.
             label_Cronologia.Visibility = label_Cronologia.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
             ListBox_cronologia.Visibility = ListBox_cronologia.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
